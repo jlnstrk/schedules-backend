@@ -15,6 +15,8 @@ const SCHEDULE_URL_CURRENT = "http://www.musterschule.de/Termine/Vertretungen_he
 const SCHEDULE_URL_FUTURE = "http://www.musterschule.de/Termine/Vertretungen_morgen.php";
 const REF_SCHEDULES = "schedules";
 const REF_METADATA = "metadata";
+
+const DOC_METADATA_ERRORS = "errors";
 const DOC_METADATA_CLIENT = "client";
 
 const CLIENT_KEY_CURRENT_SCHEDULE_ID = "currentScheduleId";
@@ -23,7 +25,11 @@ const CLIENT_KEY_FUTURE_SCHEDULE_ID = "futureScheduleId";
 const firestore = admin.firestore();
 const storage = admin.storage();
 
+var isErrorDebug: boolean = false;
+
 export default async function (req: Request, res: Response) {
+    isErrorDebug = req.query.errorDebug != null;
+
     const currentUrl = await retrieveRefreshUrl(SCHEDULE_URL_CURRENT);
     const futureUrl = await retrieveRefreshUrl(SCHEDULE_URL_FUTURE);
 
@@ -67,12 +73,10 @@ async function updateClientMetadata(key: string, documentId: string) {
 
 async function refreshSchedule(scheduleUrl: string): Promise<string> {
     const tempFilePath = await downloadSchedule(scheduleUrl);
-    const candidate: ScheduleCandidate = await extractScheduleData(tempFilePath)
+    const candidate: ScheduleCandidate = await extractScheduleData(isErrorDebug ? null : tempFilePath)
         .catch(function (error) {
             console.log("Failed to extract schedule data: " + error);
-            const fileNameDateString = tempFilePath.substring(tempFilePath.lastIndexOf("/") + 1, tempFilePath.lastIndexOf("."));
-            const target = parseFileNameDate(fileNameDateString);
-            return notifyError("Invalid pdf table structure", target)
+            return handleExtractionError(tempFilePath)
                 .then(function () {
                     return null;
                 });
@@ -80,7 +84,7 @@ async function refreshSchedule(scheduleUrl: string): Promise<string> {
     var documentId: string = null;
     if (candidate != null) {
         console.log("Successfully extracted schedule data");
-        const predictedDocumentId = generateDocumentId(candidate);
+        const predictedDocumentId = getDocumentId(candidate.pdfTarget);
         documentId = await compareAndUpdateScheduleData(candidate, tempFilePath, predictedDocumentId)
             .then(function (success: boolean) {
                 return success ? predictedDocumentId : null;
@@ -145,9 +149,29 @@ function uploadScheduleFile(tempFilePath: string): Promise<void> {
         });
 }
 
-function generateDocumentId(candidate: ScheduleCandidate): string {
-    const date = new Date(candidate.pdfTarget);
-    return date.getFullYear() + ('0' + (date.getMonth() + 1)).slice(-2) + ('0' + date.getDate()).slice(-2);
+function getDocumentId(target: Date): string {
+    return target.getFullYear() + ('0' + (target.getMonth() + 1)).slice(-2) + ('0' + target.getDate()).slice(-2);
+}
+
+async function handleExtractionError(tempFilePath: string) {
+    const fileNameDateString = tempFilePath.substring(tempFilePath.lastIndexOf("/") + 1, tempFilePath.lastIndexOf("."));
+    const target = parseFileNameDate(fileNameDateString);
+    const documentId = getDocumentId(target);
+    const errorsRef = firestore.collection(REF_METADATA)
+        .doc(DOC_METADATA_ERRORS)
+    const snapshot = await errorsRef.get();
+
+    const errors = snapshot.data();
+    const schedules = errors.schedules as string[];
+
+    const isFirstEncounter = schedules.findIndex(function (scheduleId: string) {
+        return scheduleId == documentId;
+    }) == -1;
+    if (isFirstEncounter) {
+        schedules.push(documentId);
+        await errorsRef.update(errors);
+        await notifyError("Invalid pdf table structure", target);
+    }
 }
 
 function convertToSchedule(candidate: ScheduleCandidate, created: Date, revision: number): Schedule {
