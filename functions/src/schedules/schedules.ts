@@ -33,42 +33,42 @@ export default async function (req: Request, res: Response) {
     const currentUrl = await retrieveRefreshUrl(SCHEDULE_URL_CURRENT);
     const futureUrl = await retrieveRefreshUrl(SCHEDULE_URL_FUTURE);
 
+    var currentDocumentId: string = null;
     if (currentUrl != null) {
         console.log("A schedule is available under the 'today' link, refresh will be invoked");
-        const documentId = await refreshSchedule(currentUrl);
-        if (documentId != null) {
-            await updateClientMetadata(CLIENT_KEY_CURRENT_SCHEDULE_ID, documentId);
-        }
+        currentDocumentId = await refreshSchedule(currentUrl);
     }
+    await updateClientMetadataIfNecessary(CLIENT_KEY_CURRENT_SCHEDULE_ID, currentDocumentId);
 
+    var futureDocumentId: string = null;
     if (futureUrl != null) {
         console.log("A schedule is available under the 'tomorrow' link, refresh will be invoked");
-        const documentId = await refreshSchedule(futureUrl);
-        if (documentId != null) {
-            await updateClientMetadata(CLIENT_KEY_FUTURE_SCHEDULE_ID, documentId);
-        }
+        futureDocumentId = await refreshSchedule(futureUrl);
     }
+    await updateClientMetadataIfNecessary(CLIENT_KEY_FUTURE_SCHEDULE_ID, futureDocumentId);
 
     const finalMessage = "Finished refreshing the schedules where necessary";
     console.log(finalMessage);
     res.send(finalMessage);
 }
 
-async function updateClientMetadata(key: string, documentId: string) {
+async function updateClientMetadataIfNecessary(key: string, documentId: string) {
     const snapshot = await firestore.collection(REF_METADATA)
         .doc(DOC_METADATA_CLIENT)
         .get();
     const clientMetadata = snapshot.data();
-    clientMetadata[key] = documentId;
-    await firestore.collection(REF_METADATA)
-        .doc(DOC_METADATA_CLIENT)
-        .update(clientMetadata)
-        .then(function (result: WriteResult) {
-            console.log("Successfully updated client metadata '" + key + "' to " + documentId);
-        })
-        .catch(function (error) {
-            console.log("Failed to update client metadata '" + key + "' to " + documentId);
-        })
+    if (clientMetadata[key] != documentId) {
+        clientMetadata[key] = documentId;
+        await firestore.collection(REF_METADATA)
+            .doc(DOC_METADATA_CLIENT)
+            .update(clientMetadata)
+            .then(function (result: WriteResult) {
+                console.log("Successfully updated client metadata '" + key + "' to " + documentId);
+            })
+            .catch(function (error) {
+                console.log("Failed to update client metadata '" + key + "' to " + documentId);
+            });
+    }
 }
 
 async function refreshSchedule(scheduleUrl: string): Promise<string> {

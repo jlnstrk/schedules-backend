@@ -1,0 +1,283 @@
+[debug] [2018-04-15T23:50:08.229Z] ----------------------------------------------------------------------
+[debug] [2018-04-15T23:50:08.230Z] Command:       /usr/local/bin/node /Users/julian/Documents/Software Development/Projects/Schedules/schedules-backend/functions/node_modules/.bin/firebase deploy --only functions
+[debug] [2018-04-15T23:50:08.231Z] CLI Version:   3.18.2
+[debug] [2018-04-15T23:50:08.231Z] Platform:      darwin
+[debug] [2018-04-15T23:50:08.231Z] Node Version:  v9.7.1
+[debug] [2018-04-15T23:50:08.231Z] Time:          Mon Apr 16 2018 01:50:08 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:08.231Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-15T23:50:08.240Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-15T23:50:08.240Z] > authorizing via signed-in user
+[debug] [2018-04-15T23:50:08.241Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-04-15T23:50:08.242Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/VzxP4nuCUk9kaVIPpH5kqpfcZBWUtEWOoxe1s8ZrT90',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon Apr 16 2018 01:50:08 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:08.493Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:08.497Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/musterschule-schedules  
+  
+ Mon Apr 16 2018 01:50:08 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:09.590Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:09.590Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/musterschule-schedules/tokens  
+  
+ Mon Apr 16 2018 01:50:09 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:10.410Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'musterschule-schedules'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix ./functions/ run build
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2018-04-15T23:50:14.585Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "dom-parser": "^0.1.5",
+    "download": "^6.2.5",
+    "firebase-admin": "^5.12.0",
+    "firebase-functions": "^1.0.1",
+    "firebase-tools": "^3.18.2",
+    "http-equiv-refresh": "^2.0.0",
+    "pdf.js-extract": "0.0.9",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-04-15T23:50:14.586Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/musterschule-schedules?view=CONSUMER_VIEW  
+  
+ Mon Apr 16 2018 01:50:14 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:14.586Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/musterschule-schedules?view=CONSUMER_VIEW  
+  
+ Mon Apr 16 2018 01:50:14 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:15.941Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:15.955Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-04-15T23:50:15.956Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/musterschule-schedules  
+  
+ Mon Apr 16 2018 01:50:15 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:16.863Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:16.864Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/990473870442:getServerAppConfig  
+  
+ Mon Apr 16 2018 01:50:16 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:17.476Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-04-15T23:50:17.478Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/musterschule-schedules/configs  
+  
+ Mon Apr 16 2018 01:50:17 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:17.895Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (115.7 KB) for uploading
+[debug] [2018-04-15T23:50:18.880Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions:generateUploadUrl  
+  
+ Mon Apr 16 2018 01:50:18 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:19.317Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:19.318Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-feef754a-4362-40b5-b8d2-2460054e5021/ae311206-50fb-4917-95de-06823eb764d9.zip?GoogleAccessId=990473870442@cloudservices.gserviceaccount.com&Expires=1523838019&Signature=N6ELtoUx3QkhkgCtOQ720bOaYa%2FXkA3SfrUhCpezq7C62kJsBYaQhhTuOU3zENjNz4a8vkVlQVECh2NuCIqIkC%2B8HeO69mw8DxEqr7sth5ggYi%2B6jTFnKJDUM9OUTn8jEuH%2BlMgrgEsyCaCUjc0VtTmqsDKLnJjqAo0Yfc4VoJqtyKlVVyD5OvprnYwmjU5kRJWzJ8%2BXEbOmC%2BKtGuIP%2Fc0dpG4zX4dqYL1mf13IKyvbxBGMqS%2BokKQeaXZxfEpoOxTaQIiIr3YI4eEQUihtJnQ2jw6tcu05L01ewYUZTJLlvogFm1alNXAMD1zxxsvojkiXe%2BK1V%2Fhe2%2B4Ycooyhw%3D%3D  
+ ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 65536,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: false,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     destroyed: false,
+     defaultEncoding: 'utf8',
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/var/folders/1y/d3nts3sd4v50yz63c0q_1yfh0000gn/T/firebase-functions-11404xyQVZ0HgOPFf.zip',
+  fd: 19,
+  flags: 'r',
+  mode: 438,
+  start: 0,
+  end: Infinity,
+  autoClose: true,
+  pos: 65536,
+  bytesRead: 65536,
+  closed: false } 
+ Mon Apr 16 2018 01:50:19 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:20.444Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2018-04-15T23:50:20.447Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions  
+  
+ Mon Apr 16 2018 01:50:20 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:20.957Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating function refreshSchedules...
+[debug] [2018-04-15T23:50:20.960Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating function createNotifications...
+[debug] [2018-04-15T23:50:20.960Z] Trigger is:  {"eventTrigger":{"resource":"projects/musterschule-schedules/databases/(default)/documents/schedules/{documentId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"}}
+[info] i  functions: updating function updateNotifications...
+[debug] [2018-04-15T23:50:20.960Z] Trigger is:  {"eventTrigger":{"resource":"projects/musterschule-schedules/databases/(default)/documents/schedules/{documentId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"}}
+[debug] [2018-04-15T23:50:20.962Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions/refreshSchedules 
+query params: {"updateMask":"sourceUploadUrl,name,labels,httpsTrigger"} 
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-feef754a-4362-40b5-b8d2-2460054e5021/ae311206-50fb-4917-95de-06823eb764d9.zip?GoogleAccessId=990473870442@cloudservices.gserviceaccount.com&Expires=1523838019&Signature=N6ELtoUx3QkhkgCtOQ720bOaYa%2FXkA3SfrUhCpezq7C62kJsBYaQhhTuOU3zENjNz4a8vkVlQVECh2NuCIqIkC%2B8HeO69mw8DxEqr7sth5ggYi%2B6jTFnKJDUM9OUTn8jEuH%2BlMgrgEsyCaCUjc0VtTmqsDKLnJjqAo0Yfc4VoJqtyKlVVyD5OvprnYwmjU5kRJWzJ8%2BXEbOmC%2BKtGuIP%2Fc0dpG4zX4dqYL1mf13IKyvbxBGMqS%2BokKQeaXZxfEpoOxTaQIiIr3YI4eEQUihtJnQ2jw6tcu05L01ewYUZTJLlvogFm1alNXAMD1zxxsvojkiXe%2BK1V%2Fhe2%2B4Ycooyhw%3D%3D',
+  name: 'projects/musterschule-schedules/locations/us-central1/functions/refreshSchedules',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  httpsTrigger: {} } 
+ Mon Apr 16 2018 01:50:20 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:20.963Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions/createNotifications 
+query params: {"updateMask":"sourceUploadUrl,name,labels,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-feef754a-4362-40b5-b8d2-2460054e5021/ae311206-50fb-4917-95de-06823eb764d9.zip?GoogleAccessId=990473870442@cloudservices.gserviceaccount.com&Expires=1523838019&Signature=N6ELtoUx3QkhkgCtOQ720bOaYa%2FXkA3SfrUhCpezq7C62kJsBYaQhhTuOU3zENjNz4a8vkVlQVECh2NuCIqIkC%2B8HeO69mw8DxEqr7sth5ggYi%2B6jTFnKJDUM9OUTn8jEuH%2BlMgrgEsyCaCUjc0VtTmqsDKLnJjqAo0Yfc4VoJqtyKlVVyD5OvprnYwmjU5kRJWzJ8%2BXEbOmC%2BKtGuIP%2Fc0dpG4zX4dqYL1mf13IKyvbxBGMqS%2BokKQeaXZxfEpoOxTaQIiIr3YI4eEQUihtJnQ2jw6tcu05L01ewYUZTJLlvogFm1alNXAMD1zxxsvojkiXe%2BK1V%2Fhe2%2B4Ycooyhw%3D%3D',
+  name: 'projects/musterschule-schedules/locations/us-central1/functions/createNotifications',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  eventTrigger: 
+   { resource: 'projects/musterschule-schedules/databases/(default)/documents/schedules/{documentId}',
+     eventType: 'providers/cloud.firestore/eventTypes/document.create',
+     service: 'firestore.googleapis.com' } } 
+ Mon Apr 16 2018 01:50:20 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:20.963Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions/updateNotifications 
+query params: {"updateMask":"sourceUploadUrl,name,labels,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+ { sourceUploadUrl: 'https://storage.googleapis.com/gcf-upload-us-central1-feef754a-4362-40b5-b8d2-2460054e5021/ae311206-50fb-4917-95de-06823eb764d9.zip?GoogleAccessId=990473870442@cloudservices.gserviceaccount.com&Expires=1523838019&Signature=N6ELtoUx3QkhkgCtOQ720bOaYa%2FXkA3SfrUhCpezq7C62kJsBYaQhhTuOU3zENjNz4a8vkVlQVECh2NuCIqIkC%2B8HeO69mw8DxEqr7sth5ggYi%2B6jTFnKJDUM9OUTn8jEuH%2BlMgrgEsyCaCUjc0VtTmqsDKLnJjqAo0Yfc4VoJqtyKlVVyD5OvprnYwmjU5kRJWzJ8%2BXEbOmC%2BKtGuIP%2Fc0dpG4zX4dqYL1mf13IKyvbxBGMqS%2BokKQeaXZxfEpoOxTaQIiIr3YI4eEQUihtJnQ2jw6tcu05L01ewYUZTJLlvogFm1alNXAMD1zxxsvojkiXe%2BK1V%2Fhe2%2B4Ycooyhw%3D%3D',
+  name: 'projects/musterschule-schedules/locations/us-central1/functions/updateNotifications',
+  labels: { 'deployment-tool': 'cli-firebase' },
+  eventTrigger: 
+   { resource: 'projects/musterschule-schedules/databases/(default)/documents/schedules/{documentId}',
+     eventType: 'providers/cloud.firestore/eventTypes/document.update',
+     service: 'firestore.googleapis.com' } } 
+ Mon Apr 16 2018 01:50:20 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:21.469Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:21.471Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:21.471Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:21.473Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/musterschule-schedules/locations/us-central1/functions  
+  
+ Mon Apr 16 2018 01:50:21 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:21.792Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:21.794Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:21 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:21.795Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:21 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:21.795Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:21 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:22.082Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:22.084Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:22.092Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:24.086Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:24 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:24.086Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:24 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:24.093Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:24 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:24.372Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:24.378Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:24.380Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:26.375Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:26 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:26.378Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:26 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:26.380Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:26 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:26.652Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:26.676Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:26.679Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:28.654Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:28 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:28.676Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:28 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:28.680Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:28 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:28.920Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:28.961Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:28.970Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:30.922Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:30 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:30.962Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:30 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:30.970Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:30 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:31.202Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:31.240Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:31.241Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:33.207Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:33 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:33.242Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:33 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:33.243Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:33 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:33.490Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:33.512Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:33.525Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:35.495Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:35 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:35.515Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:35 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:35.528Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:35 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:35.769Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:35.794Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:35.806Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:37.774Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:37 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:37.795Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:37 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:37.807Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:37 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:38.152Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:38.152Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:38.208Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:40.153Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS91cGRhdGVOb3RpZmljYXRpb25zL2h4cno4ZXRsR1pR  
+  
+ Mon Apr 16 2018 01:50:40 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:40.154Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9jcmVhdGVOb3RpZmljYXRpb25zL3pLSnhhcFU0ZkEw  
+  
+ Mon Apr 16 2018 01:50:40 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:40.209Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bXVzdGVyc2NodWxlLXNjaGVkdWxlcy91cy1jZW50cmFsMS9yZWZyZXNoU2NoZWR1bGVzL2dGeTBnRE05R1RV  
+  
+ Mon Apr 16 2018 01:50:40 GMT+0200 (CEST)
+[debug] [2018-04-15T23:50:40.449Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:40.472Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-15T23:50:40.490Z] <<< HTTP RESPONSE 200
