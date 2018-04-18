@@ -14,7 +14,7 @@ export default function (filePath: string): Promise<ScheduleCandidate> {
             if (err != null) {
                 console.log(err);
                 reject(err);
-            } else {
+            } else try {
                 const firstPage = data.pages[0];
                 const pageInfo = firstPage.pageInfo;
                 const isSchedule = (pageInfo.height as number) > (pageInfo.width as number);
@@ -22,7 +22,11 @@ export default function (filePath: string): Promise<ScheduleCandidate> {
                     let allEntries = [];
                     const metaLines = extractHeaderLines(data.pages[0]);
                     data.pages.forEach(function (page) {
+                        console.log(JSON.stringify(page.content))
                         const dataRows = extractEntryRows(page);
+                        if (dataRows == null) {
+                            reject("The target pdf is not extraction-compatible, text structure is invalid");
+                        }
                         const multilineFixed = fixMultilineMessages(dataRows);
                         const pageEntries = mapToEntries(multilineFixed);
                         allEntries = allEntries.concat(pageEntries);
@@ -31,6 +35,8 @@ export default function (filePath: string): Promise<ScheduleCandidate> {
                     const candidate = mapToCandidate(modified, metaLines, allEntries);
                     resolve(candidate);
                 } else reject("The target pdf is not an actual schedule pdf, pages are landscape");
+            } catch (error) {
+                reject("The target pdf is not extraction-compatible, text structure is invalid: " + error);
             }
         });
     });
@@ -102,6 +108,12 @@ function extractEntryRows(page): string[][] {
                     items.push(clone);
                 }
             })
+        }
+
+        // If even after our post-processing, there aren't 8 column entries for each row, 
+        // then we're dealing with an invalid format
+        if (items.length < 8) {
+            return null;
         }
 
         // Sort by columns and map to field texts

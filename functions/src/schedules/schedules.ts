@@ -125,6 +125,7 @@ async function compareAndUpdateScheduleData(candidate: ScheduleCandidate, tempFi
         } else {
             console.log("Document (id " + snapshot.id + ") does not yet exist");
             const schedule = convertToSchedule(candidate, candidate.pdfModified, 1);
+            console.log(JSON.stringify(schedule));
             await firestore.collection(REF_SCHEDULES)
                 .doc(documentId)
                 .set(schedule);
