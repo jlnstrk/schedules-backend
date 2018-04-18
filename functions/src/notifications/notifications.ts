@@ -9,7 +9,8 @@ import { ScheduleUpdate } from '../model/schedule.update.model';
 import { ScheduleMetadata } from '../model/schedule.metadata.model';
 import { Topic } from '../model/topic.model';
 import { NotificationType } from '../model/notification.type.model';
-import { Error } from '../model/error.model';
+import { parseScheduleIdDate } from '../dates/dates';
+import { ScheduleError } from '../model/schedule.error.model';
 
 const SCHEDULE_REVISION_ERROR = 0
 const NOTIFICATION_TIME_TO_LIVE = 60 * 60 * 24 * 1000;
@@ -50,30 +51,37 @@ export function notifyCreation(snapshot: DocumentSnapshot, context: EventContext
 }
 
 
-export function notifyError(reason: string, target: Date): Promise<void> {
-    const error = {
-        target: target,
-        reason: reason
-    } as Error;
-    const payload = {
-        android: {
-            ttl: NOTIFICATION_TIME_TO_LIVE,
-            collapseKey: buildCollapseKey(Topic.GENERAL, target, SCHEDULE_REVISION_ERROR)
-        },
-        data: {
-            type: NotificationType.ERROR,
-            error: JSON.stringify(error)
-        },
-        topic: Topic.GENERAL
-    };
-    return admin.messaging().send(payload)
-        .then(function (response: string) {
-            console.log("Sent error notification: " + response);
-        })
-        .catch(function (error) {
-            console.log("Failed to send error notification: " + error);
-        });
-
+export function notifyError(change: Change<DocumentSnapshot>, context: EventContext): Promise<void[]> {
+    const previousErrors = change.before.data().schedules as string[];
+    const allErrors = change.after.data().schedules as string[];
+    const newErrors = allErrors.filter(function (newError: string) {
+        return previousErrors.indexOf(newError) == -1;
+    });
+    return Promise.all(newErrors.map(function (errorScheduleId: string) {
+        const target = parseScheduleIdDate(errorScheduleId)
+        const error = {
+            target: target,
+            link: buildSourceLink(errorScheduleId)
+        } as ScheduleError;
+        const payload = {
+            android: {
+                ttl: NOTIFICATION_TIME_TO_LIVE,
+                collapseKey: buildCollapseKey(Topic.GENERAL, target, SCHEDULE_REVISION_ERROR)
+            },
+            data: {
+                type: NotificationType.ERROR,
+                error: JSON.stringify(error)
+            },
+            topic: Topic.GENERAL
+        };
+        return admin.messaging().send(payload)
+            .then(function (response: string) {
+                console.log("Sent error notification: " + response);
+            })
+            .catch(function (error) {
+                console.log("Failed to send error notification: " + error);
+            });
+    }));
 }
 
 function groupByTopic(entries: ScheduleEntry[]): Map<Topic, ScheduleEntry[]> {
@@ -155,4 +163,8 @@ function determineTopics(entryClass: string): Topic[] {
 function buildCollapseKey(topic: string, scheduledFor: Date, revision: number): string {
     return topic + ':' + scheduledFor.getFullYear() + ('0' + (scheduledFor.getMonth() + 1))
         .slice(-2) + ('0' + scheduledFor.getDate()).slice(-2) + ':' + revision;
+}
+
+function buildSourceLink(scheduleId: string): string {
+    return "http://www.musterschule.de/Termine/Vertretungsplan_Schueler/" + scheduleId.slice(2) + ".pdf";
 }

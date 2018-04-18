@@ -125,7 +125,6 @@ async function compareAndUpdateScheduleData(candidate: ScheduleCandidate, tempFi
         } else {
             console.log("Document (id " + snapshot.id + ") does not yet exist");
             const schedule = convertToSchedule(candidate, candidate.pdfModified, 1);
-            console.log(JSON.stringify(schedule));
             await firestore.collection(REF_SCHEDULES)
                 .doc(documentId)
                 .set(schedule);
@@ -171,7 +170,6 @@ async function handleExtractionError(tempFilePath: string) {
     if (isFirstEncounter) {
         schedules.push(documentId);
         await errorsRef.update(errors);
-        await notifyError("Invalid pdf table structure", target);
     }
 }
 

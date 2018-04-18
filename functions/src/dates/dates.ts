@@ -22,6 +22,13 @@ export function parseFileNameDate(fileNameDate: string): Date {
     return new Date(year, month, day);
 }
 
+export function parseScheduleIdDate(scheduleId: string): Date {
+    const year = parseInt(scheduleId.substring(0, 4));
+    const month = parseInt(scheduleId.substring(4, 6)) - 1;
+    const day = parseInt(scheduleId.substring(6, 8));
+    return new Date(year, month, day);
+}
+
 export function parseScheduleDate(scheduleDateElement: string): Date {
     const scheduledFor = scheduleDateElement
         .split(' ')[2]

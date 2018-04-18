@@ -22,7 +22,6 @@ export default function (filePath: string): Promise<ScheduleCandidate> {
                     let allEntries = [];
                     const metaLines = extractHeaderLines(data.pages[0]);
                     data.pages.forEach(function (page) {
-                        console.log(JSON.stringify(page.content))
                         const dataRows = extractEntryRows(page);
                         if (dataRows == null) {
                             reject("The target pdf is not extraction-compatible, text structure is invalid");
